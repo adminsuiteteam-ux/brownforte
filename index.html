@@ -337,6 +337,72 @@
             background: var(--border);
             margin: 28px 0;
         }
+
+        /* ===== INTERACTIVE CARDS & ANIMATIONS ===== */
+        .package-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        .package-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--amber);
+            box-shadow: 0 12px 24px rgba(10, 22, 40, 0.08);
+        }
+        .package-card.selected-plan {
+            border: 3px solid var(--amber) !important;
+            background: #FAFAFA;
+            box-shadow: 0 16px 32px rgba(245,158,11,0.18) !important;
+        }
+        .package-card.selected-plan::after {
+            content: '✓ SELECTED';
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: var(--green);
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Scroll Animation Utility */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .fade-in-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Form styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--navy);
+            background: white;
+            transition: all 0.2s;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--navy);
+            box-shadow: 0 0 0 3px rgba(10, 22, 40, 0.08);
+        }
+
+        @media print {
+            .contact-form-section { display: none !important; }
+        }
     </style>
 </head>
 <body>
@@ -365,15 +431,15 @@
     <!-- ===== BODY ===== -->
     <div class="body-content">
 
-        <h2>📋 Executive Summary</h2>
-        <p>Thank you for your interest in our web development services. This proposal outlines our comprehensive website packages designed for businesses at every stage — from startups needing an online presence to enterprises requiring advanced digital platforms.</p>
-        <p>Each package includes end-to-end delivery: <strong>design, development, deployment, domain, hosting, business email, SSL security, and ongoing support.</strong></p>
+        <h2 class="fade-in-up">📋 Executive Summary</h2>
+        <p class="fade-in-up">Thank you for your interest in our web development services. This proposal outlines our comprehensive website packages designed for businesses at every stage — from startups needing an online presence to enterprises requiring advanced digital platforms.</p>
+        <p class="fade-in-up">Each package includes end-to-end delivery: <strong>design, development, deployment, domain, hosting, business email, SSL security, and ongoing support.</strong></p>
 
         <!-- ============================================ -->
-        <h2>📦 Website Packages Overview</h2>
-        <p>We offer <strong>four (4) distinct packages</strong> tailored to different business needs:</p>
+        <h2 class="fade-in-up">📦 Website Packages Overview</h2>
+        <p class="fade-in-up">We offer <strong>four (4) distinct packages</strong> tailored to different business needs:</p>
 
-        <table>
+        <table class="fade-in-up">
             <thead>
                 <tr>
                     <th style="width:28%">Feature</th>
@@ -494,10 +560,10 @@
 
         <!-- ============================================ -->
         <div class="page-break"></div>
-        <h2>💰 Detailed Cost Breakdown</h2>
+        <h2 class="fade-in-up">💰 Detailed Cost Breakdown</h2>
 
         <!-- STARTER -->
-        <div class="package-card">
+        <div class="package-card fade-in-up" id="card-starter" onclick="selectPlan(this, 'Starter (₦298,500)')">
             <div class="package-header">
                 <div>
                     <div class="package-name">🥉 Package 1 — Starter</div>
@@ -521,7 +587,7 @@
         </div>
 
         <!-- BUSINESS -->
-        <div class="package-card">
+        <div class="package-card fade-in-up" id="card-business" onclick="selectPlan(this, 'Business (₦603,500)')">
             <div class="package-header">
                 <div>
                     <div class="package-name">🥈 Package 2 — Business</div>
@@ -547,7 +613,7 @@
 
         <!-- PROFESSIONAL (RECOMMENDED) -->
         <div class="page-break"></div>
-        <div class="package-card recommended">
+        <div class="package-card recommended fade-in-up selected-plan" id="card-professional" onclick="selectPlan(this, 'Professional (₦1,155,000)')">
             <div class="package-header">
                 <div>
                     <div class="package-name">🥇 Package 3 — Professional</div>
@@ -577,7 +643,7 @@
         </div>
 
         <!-- ENTERPRISE -->
-        <div class="package-card">
+        <div class="package-card fade-in-up" id="card-enterprise" onclick="selectPlan(this, 'Enterprise (₦2,725,000)')">
             <div class="package-header">
                 <div>
                     <div class="package-name">💎 Package 4 — Enterprise</div>
@@ -779,6 +845,53 @@
             </p>
         </div>
 
+        <!-- ============================================ -->
+        <div class="page-break"></div>
+        <h2 class="fade-in-up" id="contact-heading">✍️ Preferred Plan Selection & Inquiry</h2>
+        <div class="callout callout-blue fade-in-up">
+            <div class="callout-title">Ready to take the next step?</div>
+            <p>Click on one of the package cards above to auto-select it, or manually choose from the dropdown below. Complete the form and press <strong>"Send Proposal Request"</strong> to open an email compose window to send directly to us.</p>
+        </div>
+
+        <div class="contact-form-section fade-in-up" style="margin: 24px 0;">
+            <form id="proposal-form" style="background: #F8FAFC; border: 1.5px solid var(--border); border-radius: 12px; padding: 32px; display: grid; gap: 20px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <label style="display: block; font-weight: 600; font-family: 'Outfit', sans-serif; font-size: 13px; color: var(--navy); margin-bottom: 6px;">Your Name / Company Name *</label>
+                        <input type="text" id="client-name" class="form-control" placeholder="e.g. Brownforte Mechanical Engineering" required>
+                    </div>
+                    <div>
+                        <label style="display: block; font-weight: 600; font-family: 'Outfit', sans-serif; font-size: 13px; color: var(--navy); margin-bottom: 6px;">Your Email Address *</label>
+                        <input type="email" id="client-email" class="form-control" placeholder="e.g. info@brownforte.com" required>
+                    </div>
+                </div>
+                
+                <div>
+                    <label style="display: block; font-weight: 600; font-family: 'Outfit', sans-serif; font-size: 13px; color: var(--navy); margin-bottom: 6px;">Preferred Package *</label>
+                    <select id="selected-package" class="form-control" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%226%22><path d=%22M0 0h12L6 6z%22 fill=%22%230A1628%22/></svg>'); background-repeat: no-repeat; background-position: right 16px center; background-size: 10px; padding-right: 40px; -webkit-appearance: none; -moz-appearance: none; appearance: none;" required>
+                        <option value="Starter (₦298,500)">🥉 Starter Package — ₦298,500</option>
+                        <option value="Business (₦603,500)">🥈 Business Package — ₦603,500</option>
+                        <option value="Professional (₦1,155,000)" selected>🥇 Professional Package (Recommended) — ₦1,155,000</option>
+                        <option value="Enterprise (₦2,725,000)">💎 Enterprise Package — ₦2,725,000</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label style="display: block; font-weight: 600; font-family: 'Outfit', sans-serif; font-size: 13px; color: var(--navy); margin-bottom: 6px;">Message / Additional Requirements *</label>
+                    <textarea id="client-message" class="form-control" rows="5" placeholder="Let us know about your timeline, logo requirements, domain preferences, or any specific pages/sections you'd like to add..." required></textarea>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 8px;">
+                    <div style="font-size: 13px; color: var(--slate); font-weight: 500;">
+                        ⚡ Powered by <strong style="color: var(--navy); font-family: 'Outfit', sans-serif;">dimacode</strong>
+                    </div>
+                    <button type="submit" class="print-btn" style="border: none; padding: 12px 32px; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;">
+                        ✉️ Send Proposal Request
+                    </button>
+                </div>
+            </form>
+        </div>
+
         <hr>
         <p style="text-align:center; color: var(--slate); font-size: 12px; margin-top: 20px;">
             We look forward to building a world-class digital presence for<br>
@@ -794,6 +907,101 @@
     </div>
 
 </div>
+
+<script>
+    // Package Selection logic
+    function selectPlan(cardElement, packageVal) {
+        // Remove selection class from all package cards
+        document.querySelectorAll('.package-card').forEach(card => {
+            card.classList.remove('selected-plan');
+        });
+
+        // Add class to selected card
+        cardElement.classList.add('selected-plan');
+
+        // Update dropdown menu
+        const dropdown = document.getElementById('selected-package');
+        dropdown.value = packageVal;
+
+        // Scroll smoothly down to the form
+        document.getElementById('contact-heading').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+
+    // Handle dropdown selection to update cards highlights (reverse mapping)
+    document.getElementById('selected-package').addEventListener('change', function(e) {
+        const val = e.target.value;
+        document.querySelectorAll('.package-card').forEach(card => {
+            card.classList.remove('selected-plan');
+        });
+        if (val.includes('Starter')) {
+            document.getElementById('card-starter').classList.add('selected-plan');
+        } else if (val.includes('Business')) {
+            document.getElementById('card-business').classList.add('selected-plan');
+        } else if (val.includes('Professional')) {
+            document.getElementById('card-professional').classList.add('selected-plan');
+        } else if (val.includes('Enterprise')) {
+            document.getElementById('card-enterprise').classList.add('selected-plan');
+        }
+    });
+
+    // Form submission -> compose email using mailto
+    document.getElementById('proposal-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const clientName = document.getElementById('client-name').value.trim();
+        const clientEmail = document.getElementById('client-email').value.trim();
+        const selectedPackage = document.getElementById('selected-package').value;
+        const clientMessage = document.getElementById('client-message').value.trim();
+
+        const recipient = 'dimacode0@gmail.com';
+        const subject = `Website Project Request - ${clientName}`;
+        
+        const body = `Hi dimacode,\n\n` +
+                     `We have reviewed the proposal and would like to proceed with the following details:\n\n` +
+                     `Client Name: ${clientName}\n` +
+                     `Client Email: ${clientEmail}\n` +
+                     `Selected Package: ${selectedPackage}\n\n` +
+                     `Inquiry Details / Custom Needs:\n` +
+                     `---------------------------------------------\n` +
+                     `${clientMessage}\n` +
+                     `---------------------------------------------\n\n` +
+                     `Please get in touch with us to initiate next steps.\n\n` +
+                     `Best regards,\n` +
+                     `${clientName}`;
+
+        // Create mailto link
+        const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        
+        // Redirect to open email app
+        window.location.href = mailtoUrl;
+    });
+
+    // Scroll animations (Intersection Observer)
+    document.addEventListener("DOMContentLoaded", function() {
+        const animatedElements = document.querySelectorAll('.fade-in-up');
+        
+        const observerOptions = {
+            root: null, // viewport
+            rootMargin: '0px',
+            threshold: 0.15 // triggers when 15% of element is visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        animatedElements.forEach(el => {
+            observer.observe(el);
+        });
+    });
+</script>
 
 </body>
 </html>
