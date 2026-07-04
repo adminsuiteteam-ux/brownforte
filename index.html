@@ -404,6 +404,147 @@
         @media print {
             .contact-form-section { display: none !important; }
         }
+
+        /* ===== MOBILE RESPONSIVENESS ===== */
+
+        /* Tablet — 768px */
+        @media (max-width: 768px) {
+            /* Print bar */
+            .print-bar {
+                flex-direction: column;
+                gap: 8px;
+                padding: 10px 16px;
+                text-align: center;
+            }
+            .print-bar p { font-size: 11px; }
+            .spacer-top { height: 80px; }
+
+            /* Cover section */
+            .cover {
+                padding: 48px 24px 40px;
+            }
+            .cover h1 {
+                font-size: 24px;
+            }
+            .cover-subtitle {
+                font-size: 14px;
+                margin-bottom: 24px;
+            }
+            .cover-meta {
+                flex-direction: column;
+                gap: 8px;
+                font-size: 11px;
+            }
+
+            /* Body */
+            .body-content {
+                padding: 32px 20px;
+            }
+
+            /* Headings */
+            h2 { font-size: 17px; }
+            h3 { font-size: 14px; }
+
+            /* Tables — make scrollable horizontally */
+            table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                white-space: nowrap;
+            }
+            th, td {
+                padding: 10px 12px;
+                font-size: 12px;
+            }
+
+            /* Two-col grid collapses to single */
+            .two-col {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            /* Package cards */
+            .package-card { padding: 18px 16px; }
+            .package-header {
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
+            }
+            .package-name { font-size: 15px; }
+            .package-price { font-size: 18px; }
+
+            /* Contact form */
+            .contact-form-section form {
+                padding: 20px 16px !important;
+                gap: 16px !important;
+            }
+            .contact-form-section form > div:first-child {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+            }
+            /* Submit row */
+            .contact-form-section form > div:last-child {
+                flex-direction: column !important;
+                gap: 12px !important;
+                align-items: stretch !important;
+            }
+            #submit-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 20px !important;
+            }
+
+            /* Footer */
+            .doc-footer {
+                padding: 24px 20px;
+                font-size: 11px;
+            }
+        }
+
+        /* Mobile — 480px */
+        @media (max-width: 480px) {
+            .cover {
+                padding: 40px 16px 32px;
+            }
+            .cover h1 { font-size: 20px; }
+            .cover-label { font-size: 10px; letter-spacing: 2px; }
+            .cover-subtitle { font-size: 13px; }
+
+            .body-content { padding: 24px 14px; }
+
+            h2 { font-size: 15px; gap: 6px; }
+            h3 { font-size: 13px; }
+
+            .package-card { padding: 14px 12px; margin: 12px 0; }
+            .package-name { font-size: 14px; }
+            .package-price { font-size: 16px; }
+            .package-card.recommended::before {
+                font-size: 9px;
+                padding: 2px 8px;
+            }
+            .package-card.selected-plan::after {
+                font-size: 9px;
+                padding: 3px 8px;
+                top: 14px;
+                right: 14px;
+            }
+
+            .callout { padding: 12px 14px; }
+            .callout-title { font-size: 12px; }
+            .callout p { font-size: 11px; }
+
+            .form-control {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+
+            .print-btn {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+
+            .doc-footer { padding: 20px 14px; font-size: 10px; }
+        }
     </style>
 </head>
 <body>
