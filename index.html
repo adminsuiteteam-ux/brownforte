@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Development Proposal — Brownforte Mechanical Engineering Limited</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
+
+        :root {
+            --navy: #0A1628;
+            --navy-light: #132038;
+            --amber: #F59E0B;
+            --amber-light: #FBBF24;
+            --slate: #64748B;
+            --white: #FFFFFF;
+            --bg: #F8FAFC;
+            --border: #E2E8F0;
+            --green: #10B981;
+            --red: #EF4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        @page {
+            size: A4;
+            margin: 15mm 18mm;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1E293B;
+            line-height: 1.7;
+            background: var(--white);
+            font-size: 15px;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .container {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+            background: var(--white);
+        }
+
+        @media print {
+            body { background: white; font-size: 11px; }
+            .container { box-shadow: none; max-width: 100%; }
+            .no-print { display: none !important; }
+            .page-break { page-break-before: always; }
+            h2 { page-break-after: avoid; }
+            table { page-break-inside: avoid; }
+        }
+
+        /* ===== PRINT BUTTON ===== */
+        .print-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--navy);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        }
+        .print-bar p { color: rgba(255,255,255,0.7); font-size: 13px; }
+        .print-btn {
+            background: var(--amber);
+            color: var(--navy);
+            border: none;
+            padding: 10px 28px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.2s;
+        }
+        .print-btn:hover { background: var(--amber-light); transform: translateY(-1px); }
+        .spacer-top { height: 60px; }
+
+        /* ===== COVER ===== */
+        .cover {
+            background: linear-gradient(135deg, var(--navy) 0%, #162544 50%, var(--navy-light) 100%);
+            padding: 80px 64px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(245,158,11,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .cover-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 16px;
+        }
+        .cover h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+        .cover h1 span { color: var(--amber); }
+        .cover-subtitle {
+            font-size: 16px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 32px;
+        }
+        .cover-meta {
+            display: flex;
+            gap: 32px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+        }
+        .cover-meta strong { color: rgba(255,255,255,0.8); }
+
+        /* ===== BODY SECTIONS ===== */
+        .body-content { padding: 48px 64px; }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--navy);
+            margin: 36px 0 16px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--amber);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        h2:first-child { margin-top: 0; }
+
+        h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--navy);
+            margin: 24px 0 10px 0;
+        }
+
+        h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--slate);
+            margin: 16px 0 6px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        p { margin-bottom: 10px; color: #475569; }
+
+        /* ===== TABLES ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 24px 0;
+            font-size: 14px;
+        }
+        th {
+            background: var(--navy);
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+        tr:nth-child(even) { background: #F8FAFC; }
+        .total-row td {
+            font-weight: 700;
+            background: #FEF3C7 !important;
+            color: var(--navy);
+            border-top: 2px solid var(--amber);
+            font-size: 13px;
+        }
+
+        /* ===== BADGES ===== */
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-free { background: #D1FAE5; color: #065F46; }
+        .badge-recommended { background: var(--amber); color: var(--navy); padding: 3px 10px; font-size: 11px; }
+        .check { color: var(--green); font-weight: 700; }
+        .cross { color: #CBD5E1; }
+
+        /* ===== CARDS ===== */
+        .package-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 16px 0;
+            position: relative;
+        }
+        .package-card.recommended {
+            border: 2px solid var(--amber);
+            box-shadow: 0 4px 16px rgba(245,158,11,0.15);
+        }
+        .package-card.recommended::before {
+            content: '⭐ RECOMMENDED FOR BMEL';
+            position: absolute;
+            top: -11px;
+            left: 24px;
+            background: var(--amber);
+            color: var(--navy);
+            font-family: 'Outfit', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 12px;
+            border-radius: 4px;
+            letter-spacing: 1px;
+        }
+        .package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        .package-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy);
+        }
+        .package-price {
+            font-family: 'Outfit', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--amber);
+        }
+        .package-price small {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--slate);
+        }
+
+        /* ===== CALLOUT ===== */
+        .callout {
+            background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+            border-left: 4px solid var(--amber);
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 16px 0;
+        }
+        .callout-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--navy);
+            margin-bottom: 4px;
+        }
+        .callout p { margin: 0; font-size: 12px; color: #92400E; }
+
+        .callout-blue {
+            background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+            border-left: 4px solid #3B82F6;
+        }
+        .callout-blue p { color: #1E40AF; }
+
+        .callout-green {
+            background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+            border-left: 4px solid #10B981;
+        }
+        .callout-green p { color: #065F46; }
+
+        /* ===== LISTS ===== */
+        ul { margin: 8px 0 16px 0; padding-left: 0; list-style: none; }
+        ul li {
+            padding: 4px 0 4px 24px;
+            position: relative;
+            color: #475569;
+        }
+        ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--green);
+            font-weight: 700;
+            font-size: 13px;
+        }
+        .reason-list li::before { content: '→'; color: var(--amber); }
+
+        /* ===== GRID ===== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+
+        /* ===== FOOTER ===== */
+        .doc-footer {
+            background: var(--navy);
+            padding: 32px 64px;
+            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+            text-align: center;
+        }
+        .doc-footer strong { color: rgba(255,255,255,0.8); }
+
+        /* ===== DIVIDER ===== */
+        hr {
+            border: none;
+            height: 1px;
+            background: var(--border);
+            margin: 28px 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Print Button Bar -->
+<div class="print-bar no-print">
+    <p>Open the print dialog to save as PDF →</p>
+    <button class="print-btn" onclick="window.print()">📄 Save as PDF</button>
+</div>
+<div class="spacer-top no-print"></div>
+
+<div class="container">
+
+    <!-- ===== COVER ===== -->
+    <div class="cover">
+        <div class="cover-label">Website Development Proposal</div>
+        <h1>Building a World-Class<br>Digital Presence for<br><span>Brownforte Mechanical<br>Engineering Limited</span></h1>
+        <p class="cover-subtitle">Comprehensive website packages, pricing & recommendations</p>
+        <div class="cover-meta">
+            <div><strong>Date:</strong> July 4, 2026</div>
+            <div><strong>Valid Until:</strong> August 3, 2026</div>
+            <div><strong>Document:</strong> BMEL-WEB-2026-001</div>
+        </div>
+    </div>
+
+    <!-- ===== BODY ===== -->
+    <div class="body-content">
+
+        <h2>📋 Executive Summary</h2>
+        <p>Thank you for your interest in our web development services. This proposal outlines our comprehensive website packages designed for businesses at every stage — from startups needing an online presence to enterprises requiring advanced digital platforms.</p>
+        <p>Each package includes end-to-end delivery: <strong>design, development, deployment, domain, hosting, business email, SSL security, and ongoing support.</strong></p>
+
+        <!-- ============================================ -->
+        <h2>📦 Website Packages Overview</h2>
+        <p>We offer <strong>four (4) distinct packages</strong> tailored to different business needs:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:28%">Feature</th>
+                    <th>🥉 Starter</th>
+                    <th>🥈 Business</th>
+                    <th>🥇 Professional</th>
+                    <th>💎 Enterprise</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Best For</strong></td>
+                    <td>Small businesses</td>
+                    <td>Growing SMEs</td>
+                    <td>Established companies</td>
+                    <td>Large organizations</td>
+                </tr>
+                <tr>
+                    <td><strong>Number of Pages</strong></td>
+                    <td>Up to 5</td>
+                    <td>Up to 10</td>
+                    <td>Up to 20</td>
+                    <td>Unlimited</td>
+                </tr>
+                <tr>
+                    <td><strong>Custom Design</strong></td>
+                    <td>Template-based</td>
+                    <td>Semi-custom</td>
+                    <td>Fully custom</td>
+                    <td>Custom + brand strategy</td>
+                </tr>
+                <tr>
+                    <td><strong>Mobile Responsive</strong></td>
+                    <td class="check">✔</td>
+                    <td class="check">✔</td>
+                    <td class="check">✔</td>
+                    <td class="check">✔</td>
+                </tr>
+                <tr>
+                    <td><strong>Contact Form</strong></td>
+                    <td>Basic</td>
+                    <td>Advanced (multi-step)</td>
+                    <td>Advanced + file uploads</td>
+                    <td>Advanced + CRM integration</td>
+                </tr>
+                <tr>
+                    <td><strong>SEO Optimization</strong></td>
+                    <td>Basic on-page</td>
+                    <td>Standard SEO</td>
+                    <td>Advanced SEO + analytics</td>
+                    <td>Enterprise SEO + strategy</td>
+                </tr>
+                <tr>
+                    <td><strong>Blog / News</strong></td>
+                    <td class="cross">✗</td>
+                    <td class="check">✔</td>
+                    <td class="check">✔</td>
+                    <td class="check">✔ + categories</td>
+                </tr>
+                <tr>
+                    <td><strong>Project Gallery</strong></td>
+                    <td class="cross">✗</td>
+                    <td>Basic grid</td>
+                    <td>Filterable + lightbox</td>
+                    <td>Interactive + case studies</td>
+                </tr>
+                <tr>
+                    <td><strong>Testimonials</strong></td>
+                    <td class="cross">✗</td>
+                    <td>Static</td>
+                    <td>Animated carousel</td>
+                    <td>Video testimonials</td>
+                </tr>
+                <tr>
+                    <td><strong>Multilingual (i18n)</strong></td>
+                    <td class="cross">✗</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✔ (2 languages)</td>
+                    <td class="check">✔ (unlimited)</td>
+                </tr>
+                <tr>
+                    <td><strong>Animations</strong></td>
+                    <td>Minimal</td>
+                    <td>Standard</td>
+                    <td>Premium (parallax)</td>
+                    <td>Premium + 3D</td>
+                </tr>
+                <tr>
+                    <td><strong>Live Chat</strong></td>
+                    <td class="cross">✗</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✔ WhatsApp</td>
+                    <td class="check">✔ Custom chatbot</td>
+                </tr>
+                <tr>
+                    <td><strong>Careers Portal</strong></td>
+                    <td class="cross">✗</td>
+                    <td class="cross">✗</td>
+                    <td>Basic listings</td>
+                    <td>Full application system</td>
+                </tr>
+                <tr>
+                    <td><strong>Quote Request</strong></td>
+                    <td class="cross">✗</td>
+                    <td class="cross">✗</td>
+                    <td class="check">✔</td>
+                    <td class="check">✔ + auto-responses</td>
+                </tr>
+                <tr>
+                    <td><strong>Admin Dashboard</strong></td>
+                    <td class="cross">✗</td>
+                    <td class="cross">✗</td>
+                    <td>Basic</td>
+                    <td>Full-featured CMS</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- ============================================ -->
+        <div class="page-break"></div>
+        <h2>💰 Detailed Cost Breakdown</h2>
+
+        <!-- STARTER -->
+        <div class="package-card">
+            <div class="package-header">
+                <div>
+                    <div class="package-name">🥉 Package 1 — Starter</div>
+                    <p style="margin:4px 0 0;font-size:12px;">Best for small businesses & solo professionals</p>
+                </div>
+                <div class="package-price">₦298,500 <small>setup</small></div>
+            </div>
+            <table>
+                <tr><td><strong>Website Development</strong> (up to 5 pages)</td><td style="text-align:right;width:120px;">₦250,000</td></tr>
+                <tr><td><strong>Domain Registration</strong> (.com — 1 year)</td><td style="text-align:right;">₦8,500</td></tr>
+                <tr><td><strong>Web Hosting</strong> (1 year)</td><td style="text-align:right;">₦25,000</td></tr>
+                <tr><td><strong>Business Email</strong> (2 accounts)</td><td style="text-align:right;">₦15,000</td></tr>
+                <tr><td><strong>SSL Certificate</strong> (1 year)</td><td style="text-align:right;"><span class="badge badge-free">FREE</span></td></tr>
+                <tr class="total-row"><td><strong>Total Setup Cost</strong></td><td style="text-align:right;">₦298,500</td></tr>
+            </table>
+            <div class="two-col" style="font-size:12px;">
+                <div><strong>Monthly Support:</strong> ₦10,000/month</div>
+                <div><strong>Annual Renewal:</strong> ₦48,500/year</div>
+            </div>
+            <p style="font-size:12px;"><strong>Delivery Timeline:</strong> 1–2 weeks</p>
+        </div>
+
+        <!-- BUSINESS -->
+        <div class="package-card">
+            <div class="package-header">
+                <div>
+                    <div class="package-name">🥈 Package 2 — Business</div>
+                    <p style="margin:4px 0 0;font-size:12px;">Best for growing SMEs & service companies</p>
+                </div>
+                <div class="package-price">₦603,500 <small>setup</small></div>
+            </div>
+            <table>
+                <tr><td><strong>Website Development</strong> (up to 10 pages)</td><td style="text-align:right;width:120px;">₦500,000</td></tr>
+                <tr><td><strong>Domain Registration</strong> (.com — 1 year)</td><td style="text-align:right;">₦8,500</td></tr>
+                <tr><td><strong>Web Hosting</strong> (1 year — performance tier)</td><td style="text-align:right;">₦40,000</td></tr>
+                <tr><td><strong>Business Email</strong> (5 accounts)</td><td style="text-align:right;">₦25,000</td></tr>
+                <tr><td><strong>SSL Certificate</strong> (1 year)</td><td style="text-align:right;"><span class="badge badge-free">FREE</span></td></tr>
+                <tr><td><strong>SEO Setup & Configuration</strong></td><td style="text-align:right;">₦30,000</td></tr>
+                <tr class="total-row"><td><strong>Total Setup Cost</strong></td><td style="text-align:right;">₦603,500</td></tr>
+            </table>
+            <div class="two-col" style="font-size:12px;">
+                <div><strong>Monthly Support:</strong> ₦20,000/month</div>
+                <div><strong>Annual Renewal:</strong> ₦73,500/year</div>
+            </div>
+            <p style="font-size:12px;"><strong>Delivery Timeline:</strong> 2–3 weeks</p>
+        </div>
+
+        <!-- PROFESSIONAL (RECOMMENDED) -->
+        <div class="page-break"></div>
+        <div class="package-card recommended">
+            <div class="package-header">
+                <div>
+                    <div class="package-name">🥇 Package 3 — Professional</div>
+                    <p style="margin:4px 0 0;font-size:12px;">Best for established companies & corporates</p>
+                </div>
+                <div class="package-price">₦1,155,000 <small>setup</small></div>
+            </div>
+            <table>
+                <tr><td><strong>Website Development</strong> (up to 20 pages)</td><td style="text-align:right;width:120px;">₦950,000</td></tr>
+                <tr><td><strong>Domain Registration</strong> (.com + .com.ng — 1 year)</td><td style="text-align:right;">₦15,000</td></tr>
+                <tr><td><strong>Web Hosting</strong> (1 year — premium Cloudflare/VPS)</td><td style="text-align:right;">₦60,000</td></tr>
+                <tr><td><strong>Business Email</strong> (10 accounts)</td><td style="text-align:right;">₦40,000</td></tr>
+                <tr><td><strong>SSL Certificate</strong> (1 year)</td><td style="text-align:right;"><span class="badge badge-free">FREE</span></td></tr>
+                <tr><td><strong>Advanced SEO Setup & Analytics</strong></td><td style="text-align:right;">₦50,000</td></tr>
+                <tr><td><strong>Content Strategy & Copywriting</strong></td><td style="text-align:right;">₦40,000</td></tr>
+                <tr class="total-row"><td><strong>Total Setup Cost</strong></td><td style="text-align:right;">₦1,155,000</td></tr>
+            </table>
+            <div class="two-col" style="font-size:12px;">
+                <div><strong>Monthly Support:</strong> ₦35,000/month</div>
+                <div><strong>Annual Renewal:</strong> ₦115,000/year</div>
+            </div>
+            <p style="font-size:12px;"><strong>Delivery Timeline:</strong> 3–5 weeks</p>
+            <div class="callout" style="margin-top:12px;">
+                <div class="callout-title">✨ Includes Premium Features</div>
+                <p>Fully custom design, filterable project gallery, animated counters, quote request system, careers page, blog, multilingual support, WhatsApp integration, and premium animations.</p>
+            </div>
+        </div>
+
+        <!-- ENTERPRISE -->
+        <div class="package-card">
+            <div class="package-header">
+                <div>
+                    <div class="package-name">💎 Package 4 — Enterprise</div>
+                    <p style="margin:4px 0 0;font-size:12px;">Best for large organizations & multinationals</p>
+                </div>
+                <div class="package-price">₦2,725,000 <small>setup</small></div>
+            </div>
+            <table>
+                <tr><td><strong>Website Development</strong> (unlimited pages)</td><td style="text-align:right;width:120px;">₦2,000,000</td></tr>
+                <tr><td><strong>Domain Registration</strong> (.com + .com.ng + .ng — 1 year)</td><td style="text-align:right;">₦25,000</td></tr>
+                <tr><td><strong>Web Hosting</strong> (1 year — dedicated/enterprise)</td><td style="text-align:right;">₦120,000</td></tr>
+                <tr><td><strong>Business Email</strong> (25+ accounts with admin panel)</td><td style="text-align:right;">₦80,000</td></tr>
+                <tr><td><strong>SSL Certificate</strong> (1 year)</td><td style="text-align:right;"><span class="badge badge-free">FREE</span></td></tr>
+                <tr><td><strong>Enterprise SEO Strategy</strong> (3-month execution)</td><td style="text-align:right;">₦150,000</td></tr>
+                <tr><td><strong>Brand Strategy & Content Production</strong></td><td style="text-align:right;">₦100,000</td></tr>
+                <tr><td><strong>Custom Admin Dashboard / CMS</strong></td><td style="text-align:right;">₦250,000</td></tr>
+                <tr class="total-row"><td><strong>Total Setup Cost</strong></td><td style="text-align:right;">₦2,725,000</td></tr>
+            </table>
+            <div class="two-col" style="font-size:12px;">
+                <div><strong>Monthly Support:</strong> ₦60,000/month</div>
+                <div><strong>Annual Renewal:</strong> ₦225,000/year</div>
+            </div>
+            <p style="font-size:12px;"><strong>Delivery Timeline:</strong> 6–10 weeks</p>
+        </div>
+
+        <!-- ============================================ -->
+        <div class="page-break"></div>
+        <h2>📊 Side-by-Side Cost Comparison</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:30%">Cost Category</th>
+                    <th>🥉 Starter</th>
+                    <th>🥈 Business</th>
+                    <th>🥇 Professional</th>
+                    <th>💎 Enterprise</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Development Fee</strong></td><td>₦250,000</td><td>₦500,000</td><td>₦950,000</td><td>₦2,000,000</td></tr>
+                <tr><td><strong>Domain (Year 1)</strong></td><td>₦8,500</td><td>₦8,500</td><td>₦15,000</td><td>₦25,000</td></tr>
+                <tr><td><strong>Hosting (Year 1)</strong></td><td>₦25,000</td><td>₦40,000</td><td>₦60,000</td><td>₦120,000</td></tr>
+                <tr><td><strong>Business Email</strong></td><td>₦15,000</td><td>₦25,000</td><td>₦40,000</td><td>₦80,000</td></tr>
+                <tr><td><strong>SSL Certificate</strong></td><td><span class="badge badge-free">FREE</span></td><td><span class="badge badge-free">FREE</span></td><td><span class="badge badge-free">FREE</span></td><td><span class="badge badge-free">FREE</span></td></tr>
+                <tr><td><strong>SEO & Extras</strong></td><td>—</td><td>₦30,000</td><td>₦90,000</td><td>₦500,000</td></tr>
+                <tr class="total-row"><td><strong>Total Setup</strong></td><td><strong>₦298,500</strong></td><td><strong>₦603,500</strong></td><td><strong>₦1,155,000</strong></td><td><strong>₦2,725,000</strong></td></tr>
+                <tr><td><strong>Monthly Support</strong></td><td>₦10,000</td><td>₦20,000</td><td>₦35,000</td><td>₦60,000</td></tr>
+                <tr><td><strong>Annual Renewal</strong></td><td>₦48,500</td><td>₦73,500</td><td>₦115,000</td><td>₦225,000</td></tr>
+            </tbody>
+        </table>
+
+        <!-- ============================================ -->
+        <h2>✅ Included in ALL Packages</h2>
+        <div class="two-col">
+            <ul>
+                <li>Mobile-first responsive design</li>
+                <li>SSL certificate (HTTPS secured)</li>
+                <li>Cross-browser compatibility</li>
+                <li>Basic SEO (meta tags, sitemap, robots.txt)</li>
+                <li>Fast page load speeds (CDN delivery)</li>
+            </ul>
+            <ul>
+                <li>Google Analytics installation</li>
+                <li>Social media links integration</li>
+                <li>1 month free post-launch support</li>
+                <li>1-hour training session</li>
+                <li>Optimized images & minified code</li>
+            </ul>
+        </div>
+
+        <!-- ============================================ -->
+        <h2>🔧 Maintenance & Support Plans</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Package</th>
+                    <th>Monthly Plan</th>
+                    <th>Annual Plan (save 15%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Starter</strong></td><td>₦10,000/month</td><td>₦102,000/year</td></tr>
+                <tr><td><strong>Business</strong></td><td>₦20,000/month</td><td>₦204,000/year</td></tr>
+                <tr><td><strong>Professional</strong></td><td>₦35,000/month</td><td>₦357,000/year</td></tr>
+                <tr><td><strong>Enterprise</strong></td><td>₦60,000/month</td><td>₦612,000/year</td></tr>
+            </tbody>
+        </table>
+        <h4>What Maintenance Includes</h4>
+        <ul>
+            <li>Software updates and security patches</li>
+            <li>Bug fixes and troubleshooting</li>
+            <li>Minor content updates (text, images, blog posts)</li>
+            <li>Monthly performance & uptime reports</li>
+            <li>Email & phone support (24hr response; 4hr for Enterprise)</li>
+            <li>Regular backups (weekly for Starter/Business, daily for Professional/Enterprise)</li>
+            <li>Uptime monitoring (99.9% SLA for Professional/Enterprise)</li>
+        </ul>
+
+        <!-- ============================================ -->
+        <div class="page-break"></div>
+        <h2>📅 Delivery Timeline</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Package</th>
+                    <th>Timeline</th>
+                    <th>Key Milestones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>🥉 Starter</strong></td><td>1–2 weeks</td><td>Design (Day 3) → Dev (Day 5–10) → Launch (Day 14)</td></tr>
+                <tr><td><strong>🥈 Business</strong></td><td>2–3 weeks</td><td>Discovery (Day 1–3) → Design (Day 4–7) → Dev (Day 8–17) → Launch (Day 21)</td></tr>
+                <tr><td><strong>🥇 Professional</strong></td><td>3–5 weeks</td><td>Discovery (Wk 1) → Design (Wk 2) → Dev (Wk 3–4) → Launch (Wk 5)</td></tr>
+                <tr><td><strong>💎 Enterprise</strong></td><td>6–10 weeks</td><td>Strategy (Wk 1–2) → Design (Wk 3–4) → Dev (Wk 5–8) → Launch (Wk 9–10)</td></tr>
+            </tbody>
+        </table>
+
+        <!-- ============================================ -->
+        <h2>🏆 Our Recommendation for BMEL</h2>
+
+        <div class="callout">
+            <div class="callout-title">We strongly recommend the 🥇 Professional Package for Brownforte Mechanical Engineering Limited.</div>
+            <p>This package offers the ideal balance of features, performance, and value for an established engineering firm.</p>
+        </div>
+
+        <h3>Why the Professional Package?</h3>
+        <ul class="reason-list">
+            <li><strong>Industry Credibility:</strong> A fully custom design with premium animations reflects the professionalism and technical expertise that BMEL's corporate and government clients expect.</li>
+            <li><strong>Lead Generation:</strong> The Quote Request System and advanced contact forms turn your website from a digital brochure into a lead generation engine.</li>
+            <li><strong>Project Showcase:</strong> A filterable gallery with lightbox and animated statistics compellingly demonstrates BMEL's track record.</li>
+            <li><strong>Career Portal:</strong> Attract top engineering talent with a dedicated careers section, demonstrating organizational maturity.</li>
+            <li><strong>Multilingual Support:</strong> Ready for regional or international expansion with built-in i18n support.</li>
+            <li><strong>Advanced SEO:</strong> Ensure BMEL appears prominently when prospects search for mechanical engineering services.</li>
+            <li><strong>Enterprise-Grade Performance:</strong> Cloudflare hosting delivers blazing-fast speeds globally with built-in DDoS protection.</li>
+        </ul>
+
+        <div class="callout-green callout" style="margin-top:20px;">
+            <div class="callout-title">💰 Investment Summary — Professional Package</div>
+            <p style="font-size:13px;">
+                <strong>One-time setup:</strong> ₦1,155,000 &nbsp;|&nbsp;
+                <strong>Monthly support:</strong> ₦35,000/mo &nbsp;|&nbsp;
+                <strong>Annual renewal:</strong> ₦115,000/yr<br>
+                <strong>First-year total (with monthly support):</strong> ₦1,690,000
+            </p>
+        </div>
+
+        <!-- ============================================ -->
+        <h2>💳 Payment Terms</h2>
+        <p>We offer flexible payment options to suit your budget:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Option</th>
+                    <th>Payment Structure</th>
+                    <th>Benefit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Option A</strong><br>Full Payment</td>
+                    <td>100% upfront before development</td>
+                    <td><span class="badge badge-free">5% DISCOUNT</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Option B</strong><br>Two Installments</td>
+                    <td>60% before development begins<br>40% before launch</td>
+                    <td>Balanced approach</td>
+                </tr>
+                <tr>
+                    <td><strong>Option C</strong><br>Three Installments</td>
+                    <td>40% upfront<br>30% at design approval<br>30% before launch</td>
+                    <td>Maximum flexibility</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- ============================================ -->
+        <h2>📋 What We Need to Get Started</h2>
+        <ul>
+            <li>Company logo (high-resolution, SVG or PNG preferred)</li>
+            <li>Brand guidelines (colors, fonts) — if available</li>
+            <li>Content for each page (company profile, services, project photos, team bios)</li>
+            <li>High-quality project photos and company images</li>
+            <li>List of team members and their roles</li>
+            <li>Social media links</li>
+            <li>Preferred domain name (we'll check availability)</li>
+            <li>Any reference websites you admire</li>
+        </ul>
+
+        <!-- ============================================ -->
+        <h2>🚀 Next Steps</h2>
+        <div class="callout-blue callout">
+            <div class="callout-title">Ready to proceed?</div>
+            <p style="font-size:13px;">
+                <strong>1.</strong> Review this proposal and select your preferred package<br>
+                <strong>2.</strong> Reply to confirm your selection<br>
+                <strong>3.</strong> We'll send a formal agreement and invoice<br>
+                <strong>4.</strong> Upon payment, development kicks off immediately
+            </p>
+        </div>
+
+        <hr>
+        <p style="text-align:center; color: var(--slate); font-size: 12px; margin-top: 20px;">
+            We look forward to building a world-class digital presence for<br>
+            <strong style="color: var(--navy);">Brownforte Mechanical Engineering Limited</strong> 🚀
+        </p>
+
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="doc-footer">
+        <p><strong>CONFIDENTIAL</strong> — This proposal is intended solely for Brownforte Mechanical Engineering Limited.</p>
+        <p style="margin-top:4px;">© 2026 · All rights reserved</p>
+    </div>
+
+</div>
+
+</body>
+</html>
