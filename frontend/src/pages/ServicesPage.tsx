@@ -1,0 +1,79 @@
+import SEO from '@/components/ui/SEO'
+import { Link } from 'react-router-dom'
+import * as Icons from 'lucide-react'
+import { mockServices } from '@/data/mockData'
+
+export default function ServicesPage() {
+  return (
+    <>
+      <SEO
+        title="Services — Mechanical & Water Infrastructure Capabilities"
+        description="Explore our specialized services including water treatment plants, steel sectional tanks, pump installation, mechanical design and piping fabrication in Nigeria."
+      />
+
+      {/* Header */}
+      <section className="bg-navy py-20 text-white relative">
+        <div className="absolute inset-0 dot-grid-bg opacity-15 pointer-events-none" />
+        <div className="container-xl relative z-10 text-center">
+          <span className="text-amber font-heading font-semibold text-sm uppercase tracking-widest">Capabilities</span>
+          <h1 className="text-4xl sm:text-5xl font-black mt-2">Our Engineering Services</h1>
+          <p className="text-white/60 text-lg max-w-xl mx-auto mt-4">
+            Industrial, municipal, and commercial fluid engineering systems deployed by certified COREN engineers.
+          </p>
+        </div>
+      </section>
+
+      {/* Services Grid */}
+      <section className="section-pad bg-white">
+        <div className="container-xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {mockServices.map((service, idx) => {
+              const IconComponent = (Icons as any)[service.iconName] || Icons.HelpCircle
+
+              return (
+                <div
+                  key={service.slug}
+                  className="bg-white border border-slate-100 rounded-xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col h-full group"
+                >
+                  <div className="h-48 overflow-hidden relative">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
+                  </div>
+
+                  <div className="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="w-10 h-10 rounded-lg bg-navy/5 flex items-center justify-center text-navy mb-4 group-hover:bg-amber group-hover:text-navy transition-colors duration-300">
+                        <IconComponent size={20} />
+                      </div>
+                      
+                      <h3 className="font-heading font-bold text-navy text-xl mb-3">
+                        {service.title}
+                      </h3>
+                      
+                      <p className="text-sm text-slate-500 leading-relaxed line-clamp-3 mb-6">
+                        {service.shortDesc}
+                      </p>
+                    </div>
+
+                    <div className="border-t border-slate-100 pt-4">
+                      <Link
+                        to={`/services/${service.slug}`}
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy hover:text-amber transition-colors"
+                      >
+                        Technical Specifications & Process →
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}

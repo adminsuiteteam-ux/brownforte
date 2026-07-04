@@ -1,0 +1,80 @@
+import SEO from '@/components/ui/SEO'
+import { Link } from 'react-router-dom'
+import { MapPin, Briefcase, Calendar, ArrowRight } from 'lucide-react'
+import { mockCareers } from '@/data/mockData'
+
+export default function CareersPage() {
+  return (
+    <>
+      <SEO
+        title="Careers — Join Our Engineering Team"
+        description="Explore job openings, internships, and graduate programs at Brownforte Mechanical Engineering Limited. Apply online to join our team."
+      />
+
+      {/* Header */}
+      <section className="bg-navy py-20 text-white relative">
+        <div className="absolute inset-0 dot-grid-bg opacity-15 pointer-events-none" />
+        <div className="container-xl relative z-10 text-center">
+          <span className="text-amber font-heading font-semibold text-sm uppercase tracking-widest">Opportunities</span>
+          <h1 className="text-4xl sm:text-5xl font-black mt-2">Work With Us</h1>
+          <p className="text-white/60 text-lg max-w-xl mx-auto mt-4">
+            Build your professional engineering career at Nigeria's top mechanical fabrication and water infrastructure firm.
+          </p>
+        </div>
+      </section>
+
+      {/* Listings */}
+      <section className="section-pad bg-white">
+        <div className="container-xl max-w-4xl">
+          
+          <div className="mb-12">
+            <h2 className="text-2xl font-heading font-bold text-navy">Open Roles</h2>
+            <p className="text-sm text-slate-500 mt-1">Select an open position to view description, requirements, and apply online.</p>
+          </div>
+
+          <div className="space-y-6">
+            {mockCareers.map(job => (
+              <div
+                key={job.id}
+                className="border border-slate-100 rounded-xl p-6 shadow-card hover:shadow-card-hover transition-all flex flex-col md:flex-row md:items-center justify-between gap-6"
+              >
+                <div>
+                  <span className="inline-block text-[10px] font-heading font-bold bg-navy text-amber px-2.5 py-1 rounded uppercase tracking-wider mb-3">
+                    {job.type}
+                  </span>
+                  
+                  <h3 className="font-heading font-bold text-navy text-lg mb-2">
+                    {job.title}
+                  </h3>
+
+                  <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400">
+                    <span className="flex items-center gap-1">
+                      <Briefcase size={13} /> {job.department}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <MapPin size={13} /> {job.location}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Calendar size={13} /> Apply by: {job.deadline}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex-shrink-0">
+                  <Link
+                    to={`/careers/${job.id}`}
+                    className="btn-primary text-xs py-2 px-4 group"
+                  >
+                    View Details
+                    <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+    </>
+  )
+}

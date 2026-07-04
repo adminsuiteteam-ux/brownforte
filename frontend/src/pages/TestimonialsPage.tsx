@@ -1,0 +1,64 @@
+import SEO from '@/components/ui/SEO'
+import { Star } from 'lucide-react'
+import { mockTestimonials } from '@/data/mockData'
+
+export default function TestimonialsPage() {
+  return (
+    <>
+      <SEO
+        title="Client Reviews & Testimonials"
+        description="Read what estate developers, chemical plants, and municipal authorities say about partnering with Brownforte Mechanical Engineering Limited."
+      />
+
+      {/* Header */}
+      <section className="bg-navy py-20 text-white relative">
+        <div className="absolute inset-0 dot-grid-bg opacity-15 pointer-events-none" />
+        <div className="container-xl relative z-10 text-center">
+          <span className="text-amber font-heading font-semibold text-sm uppercase tracking-widest">Reviews</span>
+          <h1 className="text-4xl sm:text-5xl font-black mt-2">Client Testimonials</h1>
+          <p className="text-white/60 text-lg max-w-xl mx-auto mt-4">
+            Hear from developers, manufacturers, and municipal consultants who rely on BMEL for mechanical utilities.
+          </p>
+        </div>
+      </section>
+
+      {/* Grid */}
+      <section className="section-pad bg-white">
+        <div className="container-xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {mockTestimonials.map(t => (
+              <div
+                key={t.id}
+                className="bg-slate-50 border border-slate-100 rounded-xl p-8 shadow-card flex flex-col justify-between hover:bg-white hover:border-slate-200 hover:shadow-card-hover transition-all"
+              >
+                <div>
+                  <div className="flex gap-1 mb-4">
+                    {Array.from({ length: t.rating }).map((_, i) => (
+                      <Star key={i} size={15} className="fill-amber text-amber" />
+                    ))}
+                  </div>
+                  
+                  <p className="text-navy text-base leading-relaxed italic mb-6">
+                    "{t.review}"
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-3 border-t border-slate-200/50 pt-4">
+                  <img
+                    src={t.image}
+                    alt={t.client}
+                    className="w-10 h-10 rounded-full object-cover"
+                  />
+                  <div>
+                    <h4 className="font-heading font-bold text-navy text-sm">{t.client}</h4>
+                    <p className="text-xs text-slate-400 font-semibold">{t.company}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}

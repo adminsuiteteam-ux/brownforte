@@ -1,0 +1,152 @@
+import { Link, useParams } from 'react-router-dom'
+import SEO from '@/components/ui/SEO'
+import { mockProjects } from '@/data/mockData'
+import { ArrowLeft, Calendar, User, MapPin, Tag, Activity, Wrench } from 'lucide-react'
+
+export default function ProjectDetailPage() {
+  const { slug } = useParams<{ slug: string }>()
+  const project = mockProjects.find(p => p.slug === slug)
+
+  if (!project) {
+    return (
+      <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 text-center">
+        <h2 className="text-2xl font-bold text-navy">Project Study Not Found</h2>
+        <p className="text-slate-500 mt-2">The case study you requested is not listed.</p>
+        <Link to="/projects" className="btn-primary mt-6">
+          <ArrowLeft size={16} /> Back to Projects
+        </Link>
+      </div>
+    )
+  }
+
+  return (
+    <>
+      <SEO
+        title={`${project.title} — Case Study`}
+        description={project.description}
+      />
+
+      {/* Header */}
+      <section className="bg-navy py-20 text-white relative">
+        <div className="absolute inset-0 dot-grid-bg opacity-15 pointer-events-none" />
+        <div className="container-xl relative z-10">
+          <Link to="/projects" className="inline-flex items-center gap-1.5 text-xs text-amber font-semibold hover:underline mb-4">
+            <ArrowLeft size={12} /> Back to Projects
+          </Link>
+          <h1 className="text-3xl sm:text-5xl font-black max-w-4xl">{project.title}</h1>
+        </div>
+      </section>
+
+      {/* Main Details */}
+      <section className="section-pad bg-white">
+        <div className="container-xl grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          {/* Left Column - Core Description */}
+          <div className="lg:col-span-8 space-y-10">
+            {/* Gallery Images */}
+            <div className="grid grid-cols-1 gap-6">
+              {project.images.map((img, idx) => (
+                <div key={idx} className="h-96 md:h-[480px] overflow-hidden rounded-xl border border-slate-100 shadow-sm">
+                  <img
+                    src={img}
+                    alt={`${project.title} Main image ${idx + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Overview */}
+            <div>
+              <h2 className="text-2xl font-heading font-bold text-navy mb-4">Case Study Overview</h2>
+              <p className="text-slate-600 leading-relaxed text-base">{project.description}</p>
+            </div>
+
+            {/* Equipment Used */}
+            <div className="bg-slate-50 border border-slate-100 rounded-xl p-8">
+              <h3 className="text-lg font-heading font-bold text-navy mb-4 flex items-center gap-2">
+                <Wrench size={18} className="text-amber" />
+                <span>Equipment & Infrastructure Specs</span>
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {project.equipmentUsed.map((eq, idx) => (
+                  <div key={idx} className="text-sm text-slate-600 flex items-center gap-2 bg-white px-4 py-2.5 rounded-lg border border-slate-100">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber" />
+                    <span>{eq}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column - Project Metadata card */}
+          <div className="lg:col-span-4 space-y-6">
+            
+            {/* Project Details Box */}
+            <div className="border border-slate-100 rounded-xl p-6 shadow-card bg-slate-50/50">
+              <h3 className="font-heading font-bold text-navy text-base mb-6 border-b border-slate-200 pb-4">
+                Project Parameters
+              </h3>
+
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <User size={16} className="text-amber mt-0.5 flex-shrink-0" />
+                  <div>
+                    <span className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold block">Client</span>
+                    <span className="text-sm font-semibold text-navy">{project.client}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <MapPin size={16} className="text-amber mt-0.5 flex-shrink-0" />
+                  <div>
+                    <span className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold block">Location</span>
+                    <span className="text-sm font-semibold text-navy">{project.location}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <Calendar size={16} className="text-amber mt-0.5 flex-shrink-0" />
+                  <div>
+                    <span className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold block">Completion Date</span>
+                    <span className="text-sm font-semibold text-navy">{project.completionDate}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <Tag size={16} className="text-amber mt-0.5 flex-shrink-0" />
+                  <div>
+                    <span className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold block">Industry</span>
+                    <span className="text-sm font-semibold text-navy">{project.industry}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <Activity size={16} className="text-amber mt-0.5 flex-shrink-0" />
+                  <div>
+                    <span className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold block">Project Status</span>
+                    <span className="text-sm font-semibold text-navy">{project.status}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Services Rendered Box */}
+            <div className="border border-slate-100 rounded-xl p-6 shadow-card">
+              <h4 className="font-heading font-bold text-navy text-sm uppercase tracking-wide mb-4">Services Rendered</h4>
+              <div className="flex flex-wrap gap-2">
+                {project.servicesRendered.map((srv, idx) => (
+                  <span key={idx} className="bg-navy/5 text-navy text-xs font-semibold px-3 py-1.5 rounded-lg border border-navy/5">
+                    {srv}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+    </>
+  )
+}

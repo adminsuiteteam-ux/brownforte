@@ -1,0 +1,104 @@
+/* Google Fonts must be imported FIRST before any Tailwind directives */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-slate-800 overflow-x-hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-navy;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-amber rounded-full;
+  }
+}
+
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-dark {
+    background: rgba(10, 22, 40, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(245, 158, 11, 0.15);
+  }
+
+  .section-pad {
+    @apply py-20;
+  }
+
+  .section-pad-lg {
+    @apply py-28;
+  }
+
+  .container-xl {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-amber text-navy font-heading font-bold px-6 py-3 rounded-lg
+      hover:bg-amber-400 active:bg-amber-600 transition-all duration-200 shadow-glow-amber
+      hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 border-2 border-white text-white font-heading font-semibold px-6 py-3 rounded-lg
+      hover:bg-white hover:text-navy transition-all duration-200 hover:-translate-y-0.5;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border-2 border-amber text-amber font-heading font-semibold px-6 py-3 rounded-lg
+      hover:bg-amber hover:text-navy transition-all duration-200 hover:-translate-y-0.5;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card-hover;
+  }
+
+  .section-label {
+    @apply text-amber font-heading font-semibold text-sm uppercase tracking-widest;
+  }
+
+  .section-title {
+    @apply font-heading font-bold text-3xl sm:text-4xl lg:text-5xl;
+  }
+
+  .dot-grid-bg {
+    background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+}
