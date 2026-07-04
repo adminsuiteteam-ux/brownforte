@@ -108,7 +108,7 @@ export default function ServiceDetailPage() {
                 Need specifications, design drafts, or budget ranges for {service.title}? Speak with our engineers today.
               </p>
 
-              <Link to="/quote" className="btn-primary w-full justify-center">
+              <Link to="/contact" className="btn-primary w-full justify-center">
                 Get a Quote <ChevronRight size={16} />
               </Link>
             </div>
@@ -138,3 +138,4 @@ export default function ServiceDetailPage() {
     </>
   )
 }
+

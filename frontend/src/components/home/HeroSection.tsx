@@ -200,7 +200,7 @@ export default function HeroSection() {
             whileHover={{ scale: 1.05, transition: { type: 'spring', damping: 30, stiffness: 400 } }}
           >
             <Link
-              to="/quote"
+              to="/contact"
               className="btn-primary text-sm sm:text-base shadow-2xl"
             >
               Request a Quote
@@ -242,3 +242,4 @@ export default function HeroSection() {
     </section>
   )
 }
+

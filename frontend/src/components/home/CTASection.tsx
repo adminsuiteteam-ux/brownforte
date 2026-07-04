@@ -22,7 +22,7 @@ export default function CTASection() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link to="/quote" className="btn-primary group w-full sm:w-auto justify-center">
+          <Link to="/contact" className="btn-primary group w-full sm:w-auto justify-center">
             Get a Free Consultation
             <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
           </Link>
@@ -38,3 +38,4 @@ export default function CTASection() {
     </section>
   )
 }
+

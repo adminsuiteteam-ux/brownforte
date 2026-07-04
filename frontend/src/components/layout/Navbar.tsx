@@ -100,7 +100,7 @@ export default function Navbar() {
           </div>
           <div className="flex items-center gap-4">
             <span>{t('navbar.hours')}</span>
-            <Link to="/quote" className="text-amber font-semibold hover:underline">
+            <Link to="/contact" className="text-amber font-semibold hover:underline">
               {t('navbar.request_quote')}
             </Link>
           </div>
@@ -226,7 +226,7 @@ export default function Navbar() {
             <Link to="/search" className="w-9 h-9 flex items-center justify-center rounded-lg text-white/60 hover:text-amber hover:bg-white/5 transition-colors">
               <Search size={18} />
             </Link>
-            <Link to="/quote" className="btn-primary text-sm py-2.5 px-5">
+            <Link to="/contact" className="btn-primary text-sm py-2.5 px-5">
               {t('navbar.get_quote')}
             </Link>
           </div>
@@ -269,7 +269,7 @@ export default function Navbar() {
               <MobileLink to="/downloads">{t('navbar.mobile_downloads')}</MobileLink>
               <MobileLink to="/contact">{t('navbar.nav_contact')}</MobileLink>
               <div className="pt-3 pb-1">
-                <Link to="/quote" className="btn-primary w-full justify-center">{t('navbar.get_free_quote')}</Link>
+                <Link to="/contact" className="btn-primary w-full justify-center">{t('navbar.get_free_quote')}</Link>
               </div>
             </nav>
           </motion.div>
@@ -293,3 +293,4 @@ function MobileLink({ to, children, indent }: { to: string; children: React.Reac
     </NavLink>
   )
 }
+

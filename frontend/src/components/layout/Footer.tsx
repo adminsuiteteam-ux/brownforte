@@ -52,7 +52,7 @@ export default function Footer() {
             <p className="text-white/60 mt-1">{t('footer.cta_subtext')}</p>
           </div>
           <div className="flex gap-3 flex-shrink-0">
-            <Link to="/quote" className="btn-primary">
+            <Link to="/contact" className="btn-primary">
               {t('footer.cta_get_quote')} <ArrowRight size={16} />
             </Link>
             <Link to="/contact" className="btn-secondary text-sm py-2.5 px-5">
@@ -208,3 +208,4 @@ export default function Footer() {
     </footer>
   )
 }
+

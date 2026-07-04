@@ -22,7 +22,6 @@ const CertificationsPage = lazy(() => import('@/pages/CertificationsPage'))
 const TestimonialsPage = lazy(() => import('@/pages/TestimonialsPage'))
 const FAQPage = lazy(() => import('@/pages/FAQPage'))
 const ContactPage = lazy(() => import('@/pages/ContactPage'))
-const QuotePage = lazy(() => import('@/pages/QuotePage'))
 const PricingPage = lazy(() => import('@/pages/PricingPage'))
 const SearchPage = lazy(() => import('@/pages/SearchPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
@@ -63,7 +62,6 @@ export default function App() {
             <Route path="/testimonials" element={<TestimonialsPage />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/quote" element={<QuotePage />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="*" element={<NotFoundPage />} />
@@ -73,3 +71,4 @@ export default function App() {
     </>
   )
 }
+

@@ -345,7 +345,7 @@ export default function PricingPage() {
                     {/* CTA */}
                     <div className={`px-5 py-4 border-t ${pkg.popular ? 'bg-navy border-amber/20' : 'bg-white border-slate-100'}`}>
                       <a
-                        href="/quote"
+                        href="/contact"
                         className={`flex items-center justify-center gap-2 w-full py-3 rounded-xl font-heading font-bold text-sm transition-all duration-200 hover:-translate-y-0.5 ${
                           pkg.popular
                             ? 'bg-amber text-navy hover:bg-amber-400 shadow-glow-amber'
@@ -543,7 +543,7 @@ export default function PricingPage() {
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <a
-              href="/quote"
+              href="/contact"
               className="inline-flex items-center gap-2 bg-navy text-amber font-heading font-bold px-8 py-3.5 rounded-xl hover:bg-navy/90 transition-all duration-200 hover:-translate-y-0.5 shadow-lg"
             >
               Request a Quote <ArrowRight size={18} />
@@ -560,3 +560,4 @@ export default function PricingPage() {
     </>
   )
 }
+

@@ -32,3 +32,4 @@ export default function AnimatedCounter({ end, suffix = '', duration = 2000 }: A
     </span>
   )
 }
+
