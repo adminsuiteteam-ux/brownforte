@@ -225,18 +225,17 @@ export default function QuotePage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Approximate Budget (₦) *</label>
+                      <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Select Package *</label>
                       <select
                         required
                         value={formData.budget}
                         onChange={e => setFormData({ ...formData, budget: e.target.value })}
                         className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-amber/50"
                       >
-                        <option value="">Select budget range...</option>
-                        <option value="Under 50M">Under ₦50 Million</option>
-                        <option value="50M - 150M">₦50M - ₦150 Million</option>
-                        <option value="150M - 500M">₦150M - ₦500 Million</option>
-                        <option value="Above 500M">Above ₦500 Million</option>
+                        <option value="">Select a package...</option>
+                        <option value="Basic (₦250,000)">Basic — ₦250,000</option>
+                        <option value="Premium (₦350,000)">Premium — ₦350,000</option>
+                        <option value="Business (₦550,000)">Business — ₦550,000</option>
                       </select>
                     </div>
                     <div>
